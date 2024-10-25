@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation & LocalStorage</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">PRODUCT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">GALLERY</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">BLOG</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">INVENTORY</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5 pt-2">
+        <div class="card shadow-sm mx-auto d-flex mt-5 mb-5">
+            <div class="card-body d-flex align-items-center">
+                <div class="d-flex align-items-center mb-4 w-50">
+                    <img src="pp.jpeg" alt="Profile picture" class="rounded-circle me-3" width="150" height="150">
+                    <div>
+                        <h2 id="display-nama" class="mb-1">Nama Anda</h2>
+                        <p id="display-role" class="text-muted mb-2">Front End Designer</p>
+                        <div class="d-flex align-items-center">
+                            <button class="btn btn-primary me-2" onclick="editButton()">Edit</button>
+                            <button class="btn btn-outline-success">Resume</button>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table table-borderless w-50">
+                    <tbody>
+                        <tr>
+                            <th>Availability</th>
+                            <td id="display-avail">Full Time</td>
+                        </tr>
+                        <tr>
+                            <th>Usia</th>
+                            <td id="display-usia">19</td>
+                        </tr>
+                        <tr>
+                            <th>Lokasi</th>
+                            <td id="display-lokasi">Jakarta</td>
+                        </tr>
+                        <tr>
+                            <th>Pengalaman</th>
+                            <td id="display-pengalaman">2</td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td id="display-email">email@gmail.com</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <form action="#" id="edit-form" onsubmit="updateBiodata(event)" class="card shadow-sm mx-auto d-flex p-4 mt-5 mb-5 d-none">
+            <div class="mb-3">
+                <label for="nama" class="form-label">Nama</label>
+                <input type="text" id="nama" class="form-control" placeholder="Nama Anda">
+            </div>
+            <div class="mb-3">
+                <label for="role" class="form-label">Role</label>
+                <input type="text" id="role" class="form-control" placeholder="Front End Designer">
+            </div>
+            <div class="mb-3">
+                <label for="avail" class="form-label">Availability</label>
+                <input type="text" id="avail" class="form-control" placeholder="Full Time">
+            </div>
+            <div class="mb-3">
+                <label for="usia" class="form-label">Usia</label>
+                <input type="number" id="usia" class="form-control" placeholder="19">
+            </div>
+            <div class="mb-3">
+                <label for="lokasi" class="form-label">Lokasi</label>
+                <input type="text" id="lokasi" class="form-control" placeholder="Jakarta">
+            </div>
+            <div class="mb-3">
+                <label for="pengalaman" class="form-label">Years Experience</label>
+                <input type="number" id="pengalaman" class="form-control" placeholder="2">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" class="form-control" placeholder="email@gmail.com">
+            </div>
+            <button type="submit" class="btn btn-success w-100">Submit</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        function editButton(){
+            document.getElementById('edit-form').classList.toggle('d-none');
+
+            document.getElementById("nama").value = document.getElementById("display-nama").innerText;
+            document.getElementById("role").value = document.getElementById("display-role").innerText;
+            document.getElementById("avail").value = document.getElementById("display-avail").innerText;
+            document.getElementById("usia").value = document.getElementById("display-usia").innerText;
+            document.getElementById("lokasi").value = document.getElementById("display-lokasi").innerText;
+            document.getElementById("pengalaman").value = document.getElementById("display-pengalaman").innerText;
+            document.getElementById("email").value = document.getElementById("display-email").innerText;
+        }
+
+        function updateBiodata(event){
+            event.preventDefault();
+            const nama = document.getElementById("nama").value;
+            const role = document.getElementById("role").value;
+            const avail = document.getElementById("avail").value;
+            const usia = document.getElementById("usia").value;
+            const lokasi = document.getElementById("lokasi").value;
+            const pengalaman = document.getElementById("pengalaman").value;
+            const email = document.getElementById("email").value;
+
+            document.getElementById("display-nama").innerText = nama;
+            document.getElementById("display-role").innerText = role;
+            document.getElementById("display-avail").innerText = avail;
+            document.getElementById("display-usia").innerText = usia;
+            document.getElementById("display-lokasi").innerText = lokasi;
+            document.getElementById("display-pengalaman").innerText = pengalaman;
+            document.getElementById("display-email").innerText = email;
+
+
+            const biodata = {
+                nama,
+                role,
+                avail,
+                usia,
+                lokasi,
+                pengalaman,
+                email
+            }
+
+            localStorage.setItem('biodata', JSON.stringify(biodata));
+
+            document.getElementById("edit-form").classList.add("d-none");
+        }
+
+        function loadBiodata() {
+            const savedBiodata = JSON.parse(localStorage.getItem('biodata'));
+
+            if (savedBiodata) {
+                document.getElementById("display-nama").innerText = savedBiodata.nama;
+                document.getElementById("display-role").innerText = savedBiodata.role;
+                document.getElementById("display-avail").innerText = savedBiodata.avail;
+                document.getElementById("display-usia").innerText = savedBiodata.usia;
+                document.getElementById("display-lokasi").innerText = savedBiodata.lokasi;
+                document.getElementById("display-pengalaman").innerText = savedBiodata.pengalaman;
+                document.getElementById("display-email").innerText = savedBiodata.email;
+            }    
+        }
+
+        window.onload = loadBiodata
+    </script>
+</body>
+</html>
